@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as Sentry from '@sentry/browser';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,18 @@ export class AppComponent {
   title = 'ng-sentry';
 
   throwError() {
-    console.log('AppComponent.throwError()');
-    const o = {};
-    o['this'].that();
-    console.log(o['this'].that());
     throw new Error('AppComponent:throwError');
+  }
+
+  consoleError() {
+    console.error('This is an error');
+  }
+
+  propertyNotFound() {
+    return this['somethingThatIsNotDefined']();
+  }
+
+  logSentry() {
+    console.log(Sentry);
   }
 }
